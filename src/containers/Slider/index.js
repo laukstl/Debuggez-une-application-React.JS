@@ -10,21 +10,42 @@ const Slider = () => {
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
+
+  // Simple boucle infinie
   const nextCard = () => {
-    setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
-      5000
-    );
+    setIndex(prevIndex => (prevIndex < byDateDesc.length - 1 ? prevIndex + 1 : 0));
   };
+  
+  // Mise à jour du timer du slide
+  const updateSlide = () => {
+    const timer = setTimeout(nextCard, 5000);
+    return () => clearTimeout(timer);
+  };
+  
+  // Init du slide
   useEffect(() => {
-    nextCard();
-  });
+    const slideTimer = updateSlide();
+    return () => slideTimer();
+  }, [index]);
+  
+  // re-init le timer, re-définit la position, et relance le timer du slide
+  const handleRadioClick = (radioIdx) => {
+    clearTimeout(updateSlide());
+    setIndex(radioIdx);
+    updateSlide();
+  };
+  
+  // prévient de multiple instances du cycle de timing
+  const handleRadioChange = () => {
+    updateSlide();
+  };
+  
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
         <>
           <div
-            key={event.title}
+            key={`${Math.random()}`}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -42,10 +63,12 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={`${Math.random()}`}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  onClick={() => handleRadioClick(radioIdx)}
+                  onChange={handleRadioChange}
+                  checked={index === radioIdx}
                 />
               ))}
             </div>

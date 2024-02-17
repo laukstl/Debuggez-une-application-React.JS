@@ -1,0 +1,88 @@
+v0.1 Débarbouillage
+
+containers/Slider/index.js
+--------------------------
+11 Correction ordre de triage des évenements du plus ancien au plus recent
+--- note: à Eclaircir avec le Mentor car plusieurs infos se contredisent (...)
+? 1 : -1 : inversion des valeurs
+        new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
+
+15 Correction nombre de slide
+byDateDesc.lenght : ajout de -1
+            () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
+
+19 Protection d'un useEffect qui boucle
+ajout de index en dépendance, pour qu'il se déclenche uniquement quand l'index change
+  useEffect(() => {
+    nextCard();
+  }, [index]);
+
+27 Rectification pour clef unique ( car c'est le seul qui fonctionne )
+      `${Math.random()}`
+
+
+45 Rectification pour clef unique
+      `${Math.random()}`
+
+48 correction radioButton
+remplacement de idx par index
+                  checked={index === radioIdx}
+
+
+helpers/Date/index.js
+---------------------
+16 Correction pour que janvier commence à 1, donc ajout de +1
+export const getMonth = (date) => MONTHS[date.getMonth()+1];
+
+
+
+Components/Logo/index.js
+------------------------
+20 correction fontFamily fontSize fontWeight whiteSpace
+      <text fill="url(#paint5_linear_56_57)" style={{'fontFamily': 'Kalimati', 'fontSize': '39px', 'fontWeight': 700, 'whiteSpace': 'pre'}} x="-1.125" y="44.995">724</text>
+
+
+
+pages/home/index.js
+----------------------
+ajout multiples:
+--- correction de l'affichage de "notre dernière prestation" en raison de la non prise en compte de l'async du fetch des data
+import { useEffect, useState } from 'react';
+import ModalEvent from "../../containers/ModalEvent";
+  const { data, error } = useData();
+  const [dataLoaded, setDataLoaded] = useState(null);
+  const [last, setLast] = useState(null);
+
+  useEffect(() => {
+    if (data) {
+      setDataLoaded(data);
+      const byDateDesc = data?.events.sort((evtA, evtB) =>
+      new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
+      );
+      setLast(byDateDesc[0]);
+    } else if (error) {
+      console.error('Une erreur s\'est produite lors du chargement des données:', error);
+    }
+  }, [data, error]);
+
+  if (!dataLoaded) {
+    return <div>En attente du chargement des données...</div>;
+  }
+---ajout de la modale de la carte
+          <Modal key={last.id} Content={<ModalEvent event={last} />}>
+          {({ setIsOpened }) => (
+            <EventCard
+              imageSrc={last?.cover}
+              title={last?.title}
+              date={new Date(last?.date)}
+              small
+              label={last.type}
+              onClick={() => setIsOpened(true)}
+            />
+          )}
+          </Modal>
+
+pages/home/styles.scss
+----------------------
+8 correction d'affichage de la barre de défilement horizontale / ajout de:
+  overflow: hidden;
