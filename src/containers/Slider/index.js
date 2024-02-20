@@ -1,3 +1,4 @@
+// import { useState } from "react";
 import { useEffect, useState } from "react";
 import { useData } from "../../contexts/DataContext";
 import { getMonth } from "../../helpers/Date";
@@ -43,9 +44,9 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        <div key={`CardList_${event.title}`}>
           <div
-            key={`${Math.random()}`}
+            key={`SlideCard_${event.id}`}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -63,7 +64,8 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${Math.random()}`}
+                  // Déconseillé et pourtant la seule solution qui fonctionne
+                  key={`Slider_${Math.random()}`}
                   type="radio"
                   name="radio-button"
                   onClick={() => handleRadioClick(radioIdx)}
@@ -73,7 +75,7 @@ const Slider = () => {
               ))}
             </div>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );

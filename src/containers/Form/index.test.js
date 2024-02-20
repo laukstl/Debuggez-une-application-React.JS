@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Form from "./index";
+import waitForData from '../../waitForData';
 
 describe("When Events is created", () => {
   it("a list of event card is displayed", async () => {
@@ -11,7 +12,7 @@ describe("When Events is created", () => {
   });
 
   describe("and a click is triggered on the submit button", () => {
-    it("the success action is called", async () => {
+    it("the success action is called", waitForData( async () => {
       const onSuccess = jest.fn();
       render(<Form onSuccess={onSuccess} />);
       fireEvent(
@@ -24,6 +25,6 @@ describe("When Events is created", () => {
       await screen.findByText("En cours");
       await screen.findByText("Envoyer");
       expect(onSuccess).toHaveBeenCalled();
-    });
+    }));
   });
 });

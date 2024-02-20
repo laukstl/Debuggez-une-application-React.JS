@@ -288,21 +288,21 @@
     ],
     "focus": [
         {
-            "id": "c0f44636-0c25-493c-9b35-5d19b60d0f85",
+            "id": "1",
             "title": "World economic forum",
             "description": "Oeuvre à la coopération entre le secteur public et le privé.",
             "date": "2022-01-29T20:28:45.744Z",
             "cover": "/images/evangeline-shaw-nwLTVwb7DbU-unsplash1.png"
         },
         {
-            "id": "42b7e869-1c72-4393-8bbf-d27f3b14e9c6",
+            "id": "2",
             "title": "Nordic design week",
             "description": "Conférences sur le design de demain dans le digital",
             "date": "2022-03-29T20:28:45.744Z",
             "cover": "/images/teemu-paananen-bzdhc5b3Bxs-unsplash1.png"
         },
         {
-            "id": "a90fbc0b-7411-4463-89fb-3e62f5c788d9",
+            "id": "3",
             "title": "Sneakercraze market",
             "description": "Rencontres de spécialistes des Sneakers Européens.",
             "date": "2022-05-29T20:28:45.744Z",

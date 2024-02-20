@@ -28,6 +28,7 @@ const Page = () => {
       );
       setLast(byDateDesc[0]);
     } else if (error) {
+      // eslint-disable-next-line no-console
       console.error('Une erreur s\'est produite lors du chargement des données:', error);
     }
   }, [data, error]);
