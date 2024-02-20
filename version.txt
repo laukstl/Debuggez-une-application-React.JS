@@ -103,6 +103,9 @@ src/pages/Home/index.js ( en fonction de containers/Menu/index.js )
 components/Select/index.js
 19 correction Filtrage cards gallery : ajout du changement de valeur sur onChange dans le composant Select
     onChange(newValue);
+containers/Events/index.js
+20 correction Filtrage cards gallery : ajout du filtrage
+      : data?.events.filter(event => event.type === type)) || []
 
 src/containers/Form/index.js
 19 correction affichage modale de confirmation d'envoi de formulaire
