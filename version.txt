@@ -86,3 +86,24 @@ pages/home/styles.scss
 ----------------------
 8 correction d'affichage de la barre de défilement horizontale / ajout de:
   overflow: hidden;
+
+
+
+
+
+
+v0.2 Des erreurs étranges... corrigées
+
+src/pages/Home/index.js ( en fonction de containers/Menu/index.js )
+47 76 80 Correction des liens du Menu hu Header
+  47 id="nos-services"
+  76 id="nos-realisations"
+  80  id="notre-equipe"
+
+components/Select/index.js
+19 correction Filtrage cards gallery : ajout du changement de valeur sur onChange dans le composant Select
+    onChange(newValue);
+
+src/containers/Form/index.js
+19 correction affichage modale de confirmation d'envoi de formulaire
+        onSuccess(true);
