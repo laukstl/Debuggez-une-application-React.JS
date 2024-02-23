@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
-import EventCard from "../../components/EventCard";
+import LastEvent from "../../components/LastEvent";
 import PeopleCard from "../../components/PeopleCard";
 
 import "./style.scss";
@@ -11,33 +10,8 @@ import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
-import { useData } from "../../contexts/DataContext";
 
-import ModalEvent from "../../containers/ModalEvent";
-
-const Page = () => {
-  const { data, error } = useData();
-  const [dataLoaded, setDataLoaded] = useState(null);
-  const [last, setLast] = useState(null);
-
-  useEffect(() => {
-    if (data) {
-      setDataLoaded(data);
-      const byDateDesc = data?.events.sort((evtA, evtB) =>
-      new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
-      );
-      setLast(byDateDesc[0]);
-    } else if (error) {
-      // eslint-disable-next-line no-console
-      console.error('Une erreur s\'est produite lors du chargement des données:', error);
-    }
-  }, [data, error]);
-
-  if (!dataLoaded) {
-    return <div>En attente du chargement des données...</div>;
-  }
-
-  return <>
+const Page = () => <>
     <header>
       <Menu />
     </header>
@@ -139,18 +113,7 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-          <Modal key={last.id} Content={<ModalEvent event={last} />}>
-          {({ setIsOpened }) => (
-            <EventCard
-              imageSrc={last?.cover}
-              title={last?.title}
-              date={new Date(last?.date)}
-              small
-              label={last.type}
-              onClick={() => setIsOpened(true)}
-            />
-          )}
-          </Modal>
+        <LastEvent />
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
@@ -183,6 +146,5 @@ const Page = () => {
       </div>
     </footer>
   </>
-}
 
 export default Page;

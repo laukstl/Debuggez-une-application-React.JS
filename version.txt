@@ -123,9 +123,10 @@ Retravail sur les clefs pour les rendre unique et ajout d'une clef en 47 pour la
 49 key={`SlideCard_${event.id}`}
 68 key={`Slider_${Math.random()}`}
 
-src\pages\Home\waitForData.js
-Création d'une fonction qui attend que le message d'attente s'éfface garantissant ainsi que les données soient chargées ( un await détourné ! )
-La raison est que les tests ne passaient pas le bonk
 
-src\pages\Home\index.test.js
-Modification du fichier pour prendre en compte le waitForData
+
+v0.4
+
+- Séparation de lastEvent de l'index principal => mise en components
+- Correction de toutes les erreurs des tests
+- Correction du slide
