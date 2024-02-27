@@ -29,6 +29,13 @@ const Slider = () => {
     updateSlide();
   }, [index])
 
+  // Force le premier update aprés l'init
+  useEffect(() => {
+    if (init) {
+      updateSlide();
+    }
+  }, [init]);
+
   // Init du slide
   if(!init) {
     if(byDateDesc){

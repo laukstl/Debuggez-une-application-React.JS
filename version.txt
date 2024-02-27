@@ -130,3 +130,10 @@ v0.4
 - Séparation de lastEvent de l'index principal => mise en components
 - Correction de toutes les erreurs des tests
 - Correction du slide
+
+
+v0.5
+
+- Correction pagination de la Gallery
+- Ajout de tests unitaires
+- Correction démarrage du slider en force

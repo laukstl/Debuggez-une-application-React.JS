@@ -37,12 +37,12 @@ const EventList = () => {
   const typeList = new Set(data?.events.map((event) => event.type));
 
   return (
-    <>
+    <div data-testid="event-list">
       {error && <div>An error occured</div>}
       {data === null ? (
         "loading"
       ) : (
-        <>
+        <div className="categoryContainer">
           <h3 className="SelectTitle">Catégories</h3>
           <Select
             selection={Array.from(typeList)}
@@ -71,9 +71,9 @@ const EventList = () => {
               </a>
             ))}
           </div>
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

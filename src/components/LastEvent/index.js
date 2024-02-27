@@ -3,6 +3,7 @@ import EventCard from "../EventCard";
 import Modal from "../../containers/Modal";
 import ModalEvent from "../../containers/ModalEvent";
 import { useData } from "../../contexts/DataContext";
+import "./style.scss";
 
 const LastEvent = () => {
     const { data, error } = useData();
@@ -11,7 +12,7 @@ const LastEvent = () => {
   
     useEffect(() => {
       if (data) {
-        setDataLoaded(data);
+        setDataLoaded(true);
         const byDateDesc = data?.events.sort((evtA, evtB) =>
         new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
         );
@@ -23,7 +24,7 @@ const LastEvent = () => {
     }, [data, error]);
 
     if (!dataLoaded) {
-        return <div>En attente du chargement des données...</div>;
+        return <div>Loading...</div>;
       }
 
   return (
