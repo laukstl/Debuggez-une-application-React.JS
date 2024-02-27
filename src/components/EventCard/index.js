@@ -37,6 +37,24 @@ EventCard.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
+// EventCard.propTypes = {
+//   imageSrc: PropTypes.string,
+//   imageAlt: PropTypes.string,
+//   date: PropTypes.instanceOf(Date),
+//   title: PropTypes.string,
+//   small: PropTypes.bool,
+//   label: PropTypes.string,
+// };
+
+// EventCard.defaultProps = {
+//   imageSrc: "default_evantCard_Img",
+//   date: "2022-12-29T20:28:45.744Z",
+//   title: "default_eventCard_Title",
+//   label: "default_eventCard_Label",
+//   imageAlt: "default_eventCard_altImage",
+//   small: false,
+// }
+
 EventCard.defaultProps = {
   imageAlt: "image",
   small: false,

@@ -90,10 +90,9 @@ describe("When a page is created", () => {
      // pourquoi il le voit pas sans ça ? on sait pas...
   })
   it("an event card, with the last event, is displayed", async () => {
-    // api.loadData = jest.fn().mockReturnValue(data);
     render(
-        <LastEvent />
+      <LastEvent last={data.events[0]} />
     );
-    await screen.findByText(/Loading.../i);
+    await screen.findByText(/Conférence/i);
   })
 });
