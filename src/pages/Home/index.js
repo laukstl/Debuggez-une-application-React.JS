@@ -1,8 +1,7 @@
+/* eslint-disable prefer-destructuring */
 import React from 'react';
-// import React, { useState, useEffect } from 'react';
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
-import LastEvent from "../../components/LastEvent";
 import PeopleCard from "../../components/PeopleCard";
 
 import "./style.scss";
@@ -12,47 +11,26 @@ import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
-// import { useData } from "../../contexts/DataContext";
 
-const Page = () => 
-  // const [last, setLast] = useState({});
-  // const { data, error } = useData();
+import EventCard from "../../components/EventCard";
+import ModalEvent from "../../containers/ModalEvent";
 
-  // useEffect(() => {
-  //   const updateLastEvent = () => {
-  //     setLast({
-  //       "id": 1,
-  //       "type": "conférence",
-  //       "date": "2022-04-29T20:28:45.744Z",
-  //       "title": "User&product MixUsers",
-  //       "cover": "./images/alexandre-pellaes-6vAjp0pscX0-unsplash.png",
-  //       "description": "Présentation des nouveaux usages UX.",
-  //       "nb_guesses": 900,
-  //       "periode": "14-15-16 Avril",
-  //       "prestations": [
-  //         "1 espace d’exposition",
-  //         "1 scéne principale",
-  //         "1 espace de restaurations"
-  //       ]
-  //     });
-  //   }
-  //   updateLastEvent();
-  // }, [])
+import { useData } from "../../contexts/DataContext";
 
-  // useEffect(() => {
-  //   if (data) {
-  //     const byDateDesc = data?.events.sort((evtA, evtB) =>
-  //     new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
-  //     );
-  //     setLast(byDateDesc[0]);
-  //     console.log(last);
-  //   } else if (error) {
-  //     // eslint-disable-next-line no-console
-  //     console.error('Une erreur s\'est produite lors du chargement des données:', error);
-  //   }
-  // }, [data, error]);
+const Page = () => {
+  const { data, error } = useData();
+  let last = {};
 
-  (<>
+  if (data) {
+    const byDateDesc = data?.events.sort((evtA, evtB) =>
+    new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
+    );
+    last = byDateDesc[0];
+  } else if (error) {
+    return <p>Une erreur s&apos;est produite lors du chargement des données: {error}</p>
+  }
+
+  return (<>
     <header>
       <Menu />
     </header>
@@ -154,7 +132,20 @@ const Page = () =>
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        <LastEvent />
+        {last && last.cover && last.title && last.date && last.type && (
+          <Modal key={last.id} Content={<ModalEvent event={last} />}>
+            {({ setIsOpened }) => (
+              <EventCard
+                imageSrc={last?.cover}
+                title={last?.title}
+                date={new Date(last?.date)}
+                small
+                label={last.type}
+                onClick={() => setIsOpened(true)}
+              />
+            )}
+          </Modal>
+        )}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
@@ -187,6 +178,6 @@ const Page = () =>
       </div>
     </footer>
   </>)
-
+}
 
 export default Page;

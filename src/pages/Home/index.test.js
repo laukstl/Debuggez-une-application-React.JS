@@ -2,7 +2,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Home from "./index";
 import Events from "../../containers/Events";
-import LastEvent from "../../components/LastEvent";
 import { api, DataProvider } from "../../contexts/DataContext";
 
 describe("When Form is created", () => {
@@ -90,9 +89,7 @@ describe("When a page is created", () => {
      // pourquoi il le voit pas sans ça ? on sait pas...
   })
   it("an event card, with the last event, is displayed", async () => {
-    render(
-      <LastEvent last={data.events[0]} />
-    );
+    render(<Home />);
     await screen.findByText(/Conférence/i);
   })
 });

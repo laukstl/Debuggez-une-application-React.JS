@@ -137,3 +137,8 @@ v0.5
 - Correction pagination de la Gallery
 - Ajout de tests unitaires
 - Correction démarrage du slider en force
+
+
+v0.6
+
+- Simplifications (retrait du travail asynchrone sur lastEvent)
