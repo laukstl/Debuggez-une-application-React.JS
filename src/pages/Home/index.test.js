@@ -92,7 +92,6 @@ describe("When a page is created", () => {
     render(<Home />);
     await screen.findByText("Notre derniére prestation");
     await screen.findByText("Contactez-nous");
-    await screen.findByText("Notre derniére prestation");
   })
 
   it("an event card, with the last event, is displayed", async () => {
