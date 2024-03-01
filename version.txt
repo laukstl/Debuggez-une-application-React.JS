@@ -142,3 +142,10 @@ v0.5
 v0.6
 
 - Simplifications (retrait du travail asynchrone sur lastEvent)
+
+
+v0.7 Patinage sur place terminé
+
+- Debug général par le simple ajout d'un "?" sur focus ( data?.focus?.sort((evtA, evtB) )
+- Peaufinage des tests unitaires et validation du test fonctionnel
+- Zéro erreurs

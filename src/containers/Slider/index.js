@@ -6,11 +6,13 @@ import "./style.scss";
 
 const Slider = () => {
   const { data } = useData();
+  // const { data, error } = useData();
   const [index, setIndex] = useState(0);
   const [init, setInit] = useState(false);
   const [listLength, setListLength] = useState(0);
   const timer = useRef(null);
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
+
+  const byDateDesc = data?.focus?.sort((evtA, evtB) => // if (data && data.focus) ... else if (error) ...
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
 

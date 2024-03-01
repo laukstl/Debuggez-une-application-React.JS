@@ -1,7 +1,5 @@
-// import { render, screen } from "@testing-library/react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Home from "./index";
-import Events from "../../containers/Events";
 import { api, DataProvider } from "../../contexts/DataContext";
 
 describe("When Form is created", () => {
@@ -15,7 +13,11 @@ describe("When Form is created", () => {
 
   describe("and a click is triggered on the submit button", () => {
     it("the success message is displayed", async () => {
-      render(<Home />);
+      
+      render(
+        <Home />
+      );
+
       fireEvent(
         await screen.findByText("Envoyer"),
         new MouseEvent("click", {
@@ -34,9 +36,9 @@ const data = {
   events: [
     {
       id: 1,
-      type: "soirée entreprise",
-      date: "2022-04-29T20:28:45.744Z",
-      title: "Conférence #productCON",
+      type: "soirée entreprise factice",
+      date: "2022-05-29T20:28:45.744Z",
+      title: "Conférence #productCON factice",
       cover: "/images/stem-list-EVgsAbL51Rk-unsplash.png",
       description:
         "Présentation des outils analytics aux professionnels du secteur",
@@ -54,7 +56,7 @@ const data = {
       id: 2,
       type: "forum",
       date: "2022-04-29T20:28:45.744Z",
-      title: "Forum #productCON",
+      title: "Forum #productCON factice",
       cover: "/images/stem-list-EVgsAbL51Rk-unsplash.png",
       description:
         "Présentation des outils analytics aux professionnels du secteur",
@@ -66,30 +68,43 @@ const data = {
 };
 
 describe("When a page is created", () => {
+
   it("a list of events is displayed", async () => {
-    api.loadData = jest.fn().mockReturnValue(data);
-    render(
-      <DataProvider>
-        <Events />
-      </DataProvider>
-    );
-    await screen.findByText("Forum #productCON");
+      api.loadData = jest.fn().mockReturnValue(data);
+        render(
+          <DataProvider>
+            <Home />
+          </DataProvider>
+        );
+        // screen.debug();
+      await screen.findByText("Forum #productCON factice", { selector: ".ListContainer .EventCard__title" });
+      await screen.findByText("Conférence #productCON factice", { selector: ".ListContainer .EventCard__title" });
   })
+
   it("a list a people is displayed", async () => {
     render(<Home />);
     await screen.findByText("Samira");
     await screen.findByText("Isabelle");
     await screen.findByText("Alice");
   })
+
   it("a footer is displayed", async () => {
     render(<Home />);
     await screen.findByText("Notre derniére prestation");
     await screen.findByText("Contactez-nous");
-    await screen.findByText(/prestations/i); // i insenssible à la casse en regex
-     // pourquoi il le voit pas sans ça ? on sait pas...
+    await screen.findByText("Notre derniére prestation");
   })
+
   it("an event card, with the last event, is displayed", async () => {
-    render(<Home />);
-    await screen.findByText(/Conférence/i);
-  })
+    api.loadData = jest.fn().mockReturnValue(data);
+      render(
+        <DataProvider>
+          <Home />
+        </DataProvider>
+      );
+      // screen.debug();
+    await screen.findByText("mai", { selector: ".presta .EventCard__month" });
+    await screen.findByText("Conférence #productCON factice", { selector: ".presta .EventCard__title" });
+    await screen.findByText("soirée entreprise factice", { selector: ".presta .EventCard__label" });
+    })
 });

@@ -47,22 +47,11 @@ describe("When Events is created", () => {
         );
         // target le selector EventCard__month au lieu du DOM
         // comme il en trouve plusieurs, add de : AllBy
-        await screen.findAllByText("avril", { selector: ".EventCard__month" });
+        await screen.findAllByText("avril", { selector: "#events .EventCard__month" });
+        await screen.findByText("Forum #productCON", { selector: "#events .EventCard__title" });
+        await screen.findByText("forum", { selector: "#events .EventCard__label" });
     });
-    describe("and an error occured", () => {
-         // ajout d'un skip. useData est mal importé Directement dans le js...
-         // du coup on peut pas simu une erreur
-        it.skip("an error message is displayed", async () => {
-            api.loadData = jest.fn().mockRejectedValue();
-            render(
-                <DataProvider>
-                    <Events />
-                </DataProvider>
-            );
-            await screen.findByText("errorEmplacement");
-            await screen.findByText("An error occured");
-        });
-    });
+
     describe("and we select a category", () => {
         it("an filtered list is displayed", async () => { // trick it.only removed : removed passed auto des autres...
             api.loadData = jest.fn().mockReturnValue(data);
@@ -90,8 +79,18 @@ describe("When Events is created", () => {
             await screen.findByText("Conférence #productCON");
             expect(screen.queryByText("Forum #productCON")).not.toBeInTheDocument();
         });
+        describe("and an error occured", () => {
+           it("an error message is displayed", async () => {
+               api.loadData = jest.fn().mockRejectedValue(data);
+               render(
+                   <DataProvider>
+                       <Events />
+                   </DataProvider>
+               );
+               await screen.findByText("An error occured");
+           });
+       });
     });
-
     describe("and we click on an event", () => {
         it("the event detail is displayed", async () => {
             api.loadData = jest.fn().mockReturnValue(data);

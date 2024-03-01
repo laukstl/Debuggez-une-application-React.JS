@@ -26,10 +26,11 @@ export const DataProvider = ({ children }) => {
       setError(err);
     }
   }, []);
+  
   useEffect(() => {
     if (data) return;
     getData();
-  });
+  }, []); // correction de rendu intempestif
   
   return (
     <DataContext.Provider
