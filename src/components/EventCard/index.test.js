@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import EventCard from "./index";
 
 describe("When a event card is created", () => {
+
   it("an image is display with alt value", () => {
     render(<EventCard imageSrc="http://src-image" imageAlt="image-alt-text" date={new Date("2022-04-01")} 
     title="test event"
@@ -12,6 +13,7 @@ describe("When a event card is created", () => {
     expect(imageElement).toBeInTheDocument();
     expect(imageElement.alt).toEqual("image-alt-text");
   });
+
   it("a title, a label and a month are displayed", () => {
     render(
       <EventCard
@@ -29,7 +31,9 @@ describe("When a event card is created", () => {
     expect(labelElement).toBeInTheDocument();
     expect(monthElement).toBeInTheDocument();
   });
+
   describe("with small props", () => {
+    
     it("a modifier small is added", () => {
       render(
         <EventCard

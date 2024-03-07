@@ -79,6 +79,7 @@ describe("When a page is created", () => {
         // screen.debug();
       await screen.findByText("Forum #productCON factice", { selector: ".ListContainer .EventCard__title" });
       await screen.findByText("Conférence #productCON factice", { selector: ".ListContainer .EventCard__title" });
+      await screen.findByText("mai", { selector: ".ListContainer .EventCard__month" });
   })
 
   it("a list a people is displayed", async () => {

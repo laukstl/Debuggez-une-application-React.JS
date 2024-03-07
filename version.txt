@@ -154,3 +154,7 @@ v0.7 Patinage sur place terminé
 v0.8
 - Corrections/Améliorations du comportement/dezign du Select button
 - Amélioration du helper GetMonths
+
+
+v0.9 last fix
+- Ajout d'un test d'affichage dans l'ordre du slide
