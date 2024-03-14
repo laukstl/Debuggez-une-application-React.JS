@@ -13,12 +13,12 @@ const Slider = () => {
   const timer = useRef(null);
 
   const byDateDesc = data?.focus?.sort((evtA, evtB) => // if (data && data.focus) ... else if (error) ...
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1 // triage du plus ancien au plus récent
   );
 
   // Simple boucle infinie
   const nextCard = () => {
-    setIndex(index < listLength - 1 ? index + 1 : 0);
+    setIndex(index < listLength - 1 ? index + 1 : 0); // -1 correction index VS length
   };
   
   // Mise à jour du timer du slide
@@ -82,7 +82,6 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  // Déconseillé et pourtant la seule solution qui fonctionne
                   key={`Slider_${Math.random()}`}
                   type="radio"
                   name="radio-button"

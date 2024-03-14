@@ -158,3 +158,8 @@ v0.8
 
 v0.9 last fix
 - Ajout d'un test d'affichage dans l'ordre du slide
+
+
+v0.10
+- Ajout d'un test sur getMonth
+
